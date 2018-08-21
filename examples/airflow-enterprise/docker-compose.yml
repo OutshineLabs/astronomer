@@ -49,6 +49,7 @@ services:
     volumes:
       - $AIRFLOW_HOME/dags:/usr/local/airflow/dags:ro
       - $AIRFLOW_HOME/plugins:/usr/local/airflow/plugins:ro
+      - $AIRFLOW_HOME/incubator-airflow/airflow:/usr/lib/python3.6/site-packages/airflow:ro
 
   webserver:
     image: ${AIRFLOW_IMAGE}:${AIRFLOW_IMAGE_TAG}
