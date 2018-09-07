@@ -51,6 +51,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
+  "iteration": 1536330427114,
   "links": [],
   "panels": [
     {
@@ -114,7 +115,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(airflow_scheduler_heartbeat{instance=~'$instance_name'})",
+          "expr": "sum(airflow_scheduler_heartbeat{instance=~'$deployment'})",
           "format": "time_series",
           "intervalFactor": 2,
           "refId": "A"
@@ -194,7 +195,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(airflow_collect_dags{instance=~'$instance_name'})",
+          "expr": "sum(airflow_collect_dags{instance=~'$deployment'})",
           "format": "time_series",
           "intervalFactor": 2,
           "refId": "A"
@@ -274,7 +275,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(airflow_dagbag_size{instance=~'$instance_name'})",
+          "expr": "sum(airflow_dagbag_size{instance=~'$deployment'})",
           "format": "time_series",
           "intervalFactor": 2,
           "refId": "A"
@@ -354,7 +355,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(airflow_localtaskjob_start{instance=~'$instance_name'} - airflow_localtaskjob_end{instance=~'$instance_name'})\n",
+          "expr": "sum(airflow_localtaskjob_start{instance=~'$deployment'} - airflow_localtaskjob_end{instance=~'$deployment'})\n",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -434,7 +435,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(airflow_ti_successes{instance=~'$instance_name'})",
+          "expr": "sum(airflow_ti_successes{instance=~'$deployment'})",
           "format": "time_series",
           "intervalFactor": 2,
           "refId": "A"
@@ -514,7 +515,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(airflow_ti_failures{instance=~'$instance_name'})",
+          "expr": "sum(airflow_ti_failures{instance=~'$deployment'})",
           "format": "time_series",
           "intervalFactor": 2,
           "refId": "A"
@@ -570,7 +571,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(airflow_operator_successes{instance=~'$instance_name'}[1m])",
+          "expr": "rate(airflow_operator_successes{instance=~'$deployment'}[1m])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{operator}}",
@@ -655,7 +656,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(airflow_operator_failures{instance=~'$instance_name'}[1m])",
+          "expr": "rate(airflow_operator_failures{instance=~'$deployment'}[1m])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{operator}}",
@@ -739,7 +740,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "airflow_dagrun_dependency_check{instance=~'$instance_name', quantile=\"0.5\"}",
+          "expr": "airflow_dagrun_dependency_check{instance=~'$deployment', quantile=\"0.5\"}",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
@@ -825,7 +826,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "airflow_dagrun_dependency_check{instance=~'$instance_name', quantile=\"0.9\"}",
+          "expr": "airflow_dagrun_dependency_check{instance=~'$deployment', quantile=\"0.9\"}",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
@@ -911,7 +912,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "airflow_dagrun_dependency_check{instance=~'$instance_name', quantile=\"0.99\"}",
+          "expr": "airflow_dagrun_dependency_check{instance=~'$deployment', quantile=\"0.99\"}",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
@@ -970,17 +971,20 @@
       {
         "allValue": null,
         "current": {
+          "tags": [],
           "text": "All",
-          "value": "$__all"
+          "value": [
+            "$__all"
+          ]
         },
         "datasource": "Prometheus",
         "hide": 0,
         "includeAll": true,
         "label": "Deployment",
         "multi": true,
-        "name": "instance_name",
+        "name": "deployment",
         "options": [],
-        "query": "label_values(airflow_collect_dags, instance)",
+        "query": "label_values(airflow_dagbag_size, instance)",
         "refresh": 1,
         "regex": "",
         "sort": 0,
