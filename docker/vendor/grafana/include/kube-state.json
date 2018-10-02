@@ -74,7 +74,7 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 4,
+        "w": 8,
         "x": 0,
         "y": 0
       },
@@ -156,8 +156,8 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 5,
-        "x": 4,
+        "w": 8,
+        "x": 8,
         "y": 0
       },
       "id": 34,
@@ -220,87 +220,6 @@
     {
       "cacheTimeout": null,
       "colorBackground": false,
-      "colorValue": false,
-      "colors": [
-        "#299c46",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "datasource": null,
-      "format": "decbytes",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 5,
-        "x": 9,
-        "y": 0
-      },
-      "id": 40,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "sum(kube_pod_container_resource_requests_memory_bytes)",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": "",
-      "title": "Total Memory Requests",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "avg"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
       "colorValue": true,
       "colors": [
         "#299c46",
@@ -319,8 +238,8 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 5,
-        "x": 14,
+        "w": 8,
+        "x": 16,
         "y": 0
       },
       "id": 36,
@@ -379,87 +298,6 @@
         }
       ],
       "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": false,
-      "colors": [
-        "#d44a3a",
-        "rgba(237, 129, 40, 0.89)",
-        "#299c46"
-      ],
-      "datasource": null,
-      "format": "decbytes",
-      "gauge": {
-        "maxValue": 64000000000,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 5,
-        "x": 19,
-        "y": 0
-      },
-      "id": 38,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "sum(kube_pod_container_resource_limits_memory_bytes)",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": "",
-      "title": "Total Memory Limits",
-      "type": "singlestat",
-      "valueFontSize": "50%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "avg"
     },
     {
       "cacheTimeout": null,
@@ -767,9 +605,9 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "count(kube_pod_status_ready > 0)",
+          "expr": "count(count by (pod) (kube_pod_status_ready==1))",
           "format": "time_series",
-          "instant": true,
+          "instant": false,
           "intervalFactor": 1,
           "refId": "A"
         }
@@ -848,7 +686,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "count(kube_pod_status_scheduled==1)",
+          "expr": "count(count by (pod) (kube_pod_status_scheduled==1))",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
@@ -995,7 +833,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "count(kube_pod_container_status_ready == 1)",
+          "expr": "count(count by (container) (kube_pod_container_status_ready==1))",
           "format": "time_series",
           "hide": false,
           "instant": true,
@@ -1078,7 +916,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "count(kube_pod_container_status_terminated > 0)",
+          "expr": "count(count by (container) (kube_pod_container_status_terminated > 0))",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -1104,12 +942,12 @@
       "datasource": null,
       "fontSize": "100%",
       "gridPos": {
-        "h": 9,
+        "h": 6,
         "w": 16,
         "x": 8,
         "y": 12
       },
-      "id": 32,
+      "id": 44,
       "links": [],
       "pageSize": null,
       "scroll": true,
@@ -1120,6 +958,12 @@
       },
       "styles": [
         {
+          "alias": "Time",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "Time",
+          "type": "date"
+        },
+        {
           "alias": "",
           "colorMode": null,
           "colors": [
@@ -1128,33 +972,34 @@
             "rgba(50, 172, 45, 0.97)"
           ],
           "decimals": 2,
-          "pattern": "\\b(?!container|pod|Value)\\b\\S+",
+          "pattern": "\\b(?!Time|container|pod|reason|Value)\\b\\S+",
           "thresholds": [],
           "type": "hidden",
           "unit": "short"
         },
         {
-          "alias": "Status",
-          "colorMode": "cell",
+          "alias": "",
+          "colorMode": "row",
           "colors": [
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)",
             "rgba(237, 129, 40, 0.89)"
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
+          "decimals": 0,
+          "link": false,
           "mappingType": 2,
           "pattern": "Value",
           "rangeMaps": [
             {
               "from": "0",
-              "text": "Ready",
+              "text": "OK",
               "to": "0"
             },
             {
               "from": "1",
-              "text": "Waiting",
-              "to": "2"
+              "text": "Warning",
+              "to": "10000000"
             }
           ],
           "thresholds": [
@@ -1165,11 +1010,11 @@
           "unit": "short",
           "valueMaps": [
             {
-              "text": "Ready",
+              "text": "OK",
               "value": "0"
             },
             {
-              "text": "Waiting",
+              "text": "Warning",
               "value": "1"
             }
           ]
@@ -1177,14 +1022,14 @@
       ],
       "targets": [
         {
-          "expr": "kube_pod_container_status_waiting",
+          "expr": "kube_pod_container_status_waiting_reason==1",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
           "refId": "A"
         }
       ],
-      "title": "Container Schedule Queue",
+      "title": "Waiting Container Statuses",
       "transform": "table",
       "type": "table"
     },
@@ -1359,90 +1204,89 @@
       "type": "table"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
+      "columns": [],
       "datasource": null,
-      "fill": 1,
+      "fontSize": "100%",
       "gridPos": {
-        "h": 12,
+        "h": 6,
         "w": 16,
         "x": 8,
-        "y": 21
+        "y": 18
       },
-      "id": 20,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
+      "id": 50,
       "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pageSize": null,
+      "scroll": true,
+      "showHeader": true,
+      "sort": {
+        "col": 0,
+        "desc": true
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "Time",
+          "type": "date"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "\\b(?!Time|container|pod|reason|Value)\\b\\S+",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": "cell",
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(50, 172, 45, 0.97)",
+            "rgba(245, 54, 54, 0.9)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 2,
+          "pattern": "Value",
+          "rangeMaps": [
+            {
+              "from": "0",
+              "text": "OK",
+              "to": "0"
+            },
+            {
+              "from": "1",
+              "text": "Terminating",
+              "to": "1000000"
+            }
+          ],
+          "thresholds": [
+            "0",
+            "1"
+          ],
+          "type": "string",
+          "unit": "short"
+        }
+      ],
       "targets": [
         {
-          "expr": "sum(container_memory_working_set_bytes) by (container_name) / sum(label_join(kube_pod_container_resource_limits_memory_bytes, \"container_name\", \"\", \"container\")) by (container_name)",
-          "format": "time_series",
-          "instant": false,
+          "expr": "kube_pod_container_status_terminated_reason==1",
+          "format": "table",
+          "instant": true,
           "intervalFactor": 1,
           "refId": "A"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Container Memory Saturation",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "decbytes",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "decbytes",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "title": "Terminating Pod Statuses",
+      "transform": "table",
+      "type": "table"
     },
     {
       "cacheTimeout": null,
@@ -1530,6 +1374,95 @@
       "datasource": null,
       "fontSize": "100%",
       "gridPos": {
+        "h": 9,
+        "w": 16,
+        "x": 8,
+        "y": 24
+      },
+      "id": 32,
+      "links": [],
+      "pageSize": null,
+      "scroll": true,
+      "showHeader": true,
+      "sort": {
+        "col": 0,
+        "desc": true
+      },
+      "styles": [
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "\\b(?!container|pod|Value)\\b\\S+",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        },
+        {
+          "alias": "Status",
+          "colorMode": "cell",
+          "colors": [
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)",
+            "rgba(237, 129, 40, 0.89)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 2,
+          "pattern": "Value",
+          "rangeMaps": [
+            {
+              "from": "0",
+              "text": "Ready",
+              "to": "0"
+            },
+            {
+              "from": "1",
+              "text": "Waiting",
+              "to": "2"
+            }
+          ],
+          "thresholds": [
+            "0",
+            "1"
+          ],
+          "type": "string",
+          "unit": "short",
+          "valueMaps": [
+            {
+              "text": "Ready",
+              "value": "0"
+            },
+            {
+              "text": "Waiting",
+              "value": "1"
+            }
+          ]
+        }
+      ],
+      "targets": [
+        {
+          "expr": "kube_pod_container_status_waiting",
+          "format": "table",
+          "instant": true,
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "title": "Container Schedule Queue",
+      "transform": "table",
+      "type": "table"
+    },
+    {
+      "columns": [],
+      "datasource": null,
+      "fontSize": "100%",
+      "gridPos": {
         "h": 7,
         "w": 8,
         "x": 0,
@@ -1603,12 +1536,188 @@
       "title": "Stateful Set Statuses",
       "transform": "table",
       "type": "table"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 33
+      },
+      "id": 42,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "kube_pod_container_resource_requests_memory_bytes/kube_pod_container_resource_limits_memory_bytes",
+          "format": "time_series",
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{pod}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Pod Memory Allocation",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 0,
+          "format": "percentunit",
+          "label": "",
+          "logBase": 1,
+          "max": "1",
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 41
+      },
+      "id": 20,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(container_memory_working_set_bytes) by (container_name) / sum(label_join(kube_pod_container_resource_limits_memory_bytes, \"container_name\", \"\", \"container\")) by (container_name)",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "legendFormat": "{{container_name}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Container Memory Saturation",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "percentunit",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
   "refresh": "5s",
   "schemaVersion": 16,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "kubernetes"
+  ],
   "templating": {
     "list": []
   },
@@ -1644,5 +1753,5 @@
   "timezone": "",
   "title": "Kubernetes State Monitoring",
   "uid": "5Y6WKu0mk",
-  "version": 11
+  "version": 16
 }
