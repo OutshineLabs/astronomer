@@ -49,6 +49,7 @@ services:
     volumes:
       - $AIRFLOW_HOME/dags:/usr/local/airflow/dags:ro
       - $AIRFLOW_HOME/plugins:/usr/local/airflow/plugins:ro
+      - $AIRFLOW_HOME/incubator-airflow/airflow:/usr/lib/python3.6/site-packages/airflow:ro
 
   webserver:
     image: ${AIRFLOW_IMAGE}:${AIRFLOW_IMAGE_TAG}
@@ -70,6 +71,7 @@ services:
     volumes:
       - $AIRFLOW_HOME/dags:/usr/local/airflow/dags:ro
       - $AIRFLOW_HOME/plugins:/usr/local/airflow/plugins:ro
+      - $AIRFLOW_HOME/incubator-airflow/airflow:/usr/lib/python3.6/site-packages/airflow:ro
 
   worker:
     image: ${AIRFLOW_IMAGE}:${AIRFLOW_IMAGE_TAG}
@@ -89,6 +91,7 @@ services:
     volumes:
       - $AIRFLOW_HOME/dags:/usr/local/airflow/dags:ro
       - $AIRFLOW_HOME/plugins:/usr/local/airflow/plugins:ro
+      - $AIRFLOW_HOME/incubator-airflow/airflow:/usr/lib/python3.6/site-packages/airflow:ro
       - worker_data:/usr/local/airflow/logs
 
   worker-gc:
@@ -162,7 +165,8 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
+      - ./datasource.yaml:/etc/grafana//datasources/datasource.yaml
+      - ${PWD}/grafana_scripts:/usr/share/grafana/public/dashboards
 
   cadvisor:
     image: astronomerinc/ap-cadvisor:latest
